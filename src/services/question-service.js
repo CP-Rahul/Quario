@@ -23,7 +23,7 @@ async function createQuestion(data) {
 
 async function getQuestions() {
     try {
-        const question = await questionRepository.getAll();
+        const question = await questionRepository.getAllQuestionsAndAnswers();
         return question;
     } catch(error) {
         throw new AppError('Cannot get the questions', StatusCodes.INTERNAL_SERVER_ERROR);
