@@ -23,6 +23,24 @@ async function createQuestion(req, res) {
     }
 }
 
+async function getQuestions(req, res) {
+    try {
+        const questions = await QuestionService.getQuestions();
+        SuccessResponse.data = questions;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        console.log(error)
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
-    createQuestion
+    createQuestion,
+    getQuestions
 }

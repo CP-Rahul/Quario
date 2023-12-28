@@ -9,4 +9,7 @@ router.post('/',
         QuestionMiddlewares.validateCreateRequest,
         QuestionController.createQuestion);
 
+router.get('/',
+        QuestionController.getQuestions);
+
 module.exports = router;

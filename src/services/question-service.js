@@ -21,6 +21,16 @@ async function createQuestion(data) {
     }
 }
 
+async function getQuestions() {
+    try {
+        const question = await questionRepository.getAll();
+        return question;
+    } catch(error) {
+        throw new AppError('Cannot get the questions', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
-    createQuestion
+    createQuestion,
+    getQuestions
 }
