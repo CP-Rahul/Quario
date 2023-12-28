@@ -15,4 +15,8 @@ router.get('/',
 router.get('/:id',
         QuestionController.getQuestion);
 
+router.patch('/:id',
+        QuestionMiddlewares.validateUpdateRequest,
+        QuestionController.updateQuestion);
+
 module.exports = router;

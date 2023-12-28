@@ -52,8 +52,26 @@ async function getQuestion(req, res) {
     }
 }
 
+async function updateQuestion(req, res) {
+    try {
+        const question = await QuestionService.updateQuestion({
+            description: req.body.description
+        },req.params.id);
+        SuccessResponse.data = question;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createQuestion,
     getQuestions,
-    getQuestion
+    getQuestion,
+    updateQuestion
 }

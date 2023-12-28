@@ -42,8 +42,21 @@ async function getQuestion(id) {
     }
 }
 
+async function updateQuestion(data, id) {
+    try {
+        const question = await questionRepository.update(data, id);
+        return question;
+    } catch(error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Cannot update the requested question', error.statusCode);
+        }            
+        throw new AppError('Cannot get the requested question', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     createQuestion,
     getQuestions,
-    getQuestion
+    getQuestion,
+    updateQuestion
 }
