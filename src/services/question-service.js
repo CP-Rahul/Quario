@@ -30,7 +30,20 @@ async function getQuestions() {
     }
 }
 
+async function getQuestion(id) {
+    try {
+        const question = await questionRepository.get(id);
+        return question;
+    } catch(error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Cannot get the requested question', error.statusCode);
+        }            
+        throw new AppError('Cannot get the requested question', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     createQuestion,
-    getQuestions
+    getQuestions,
+    getQuestion
 }

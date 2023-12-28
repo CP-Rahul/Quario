@@ -12,4 +12,7 @@ router.post('/',
 router.get('/',
         QuestionController.getQuestions);
 
+router.get('/:id',
+        QuestionController.getQuestion);
+
 module.exports = router;

@@ -15,7 +15,6 @@ async function createQuestion(req, res) {
                 .status(StatusCodes.CREATED)
                 .json(SuccessResponse);
     } catch (error) {
-        console.log(error)
         ErrorResponse.error = error;
         return res
                 .status(error.statusCode)
@@ -31,7 +30,6 @@ async function getQuestions(req, res) {
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
     } catch (error) {
-        console.log(error)
         ErrorResponse.error = error;
         return res
                 .status(error.statusCode)
@@ -39,8 +37,23 @@ async function getQuestions(req, res) {
     }
 }
 
+async function getQuestion(req, res) {
+    try {
+        const question = await QuestionService.getQuestion(req.params.id);
+        SuccessResponse.data = question;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
 
 module.exports = {
     createQuestion,
-    getQuestions
+    getQuestions,
+    getQuestion
 }
