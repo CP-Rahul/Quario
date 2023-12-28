@@ -26,19 +26,20 @@ async function getQuestions() {
         const question = await questionRepository.getAllQuestionsAndAnswers();
         return question;
     } catch(error) {
-        throw new AppError('Cannot get the questions', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot get the questions and answers', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
 async function getQuestion(id) {
     try {
-        const question = await questionRepository.get(id);
+        const question = await questionRepository.getQuestionAndAnswers(id);
         return question;
     } catch(error) {
+        console.log(error)
         if(error.statusCode == StatusCodes.NOT_FOUND) {
-            throw new AppError('Cannot get the requested question', error.statusCode);
+            throw new AppError('Cannot get the requested question and answers', error.statusCode);
         }            
-        throw new AppError('Cannot get the requested question', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot get the requested question and answers', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
