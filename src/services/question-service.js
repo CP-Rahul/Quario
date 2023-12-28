@@ -54,9 +54,23 @@ async function updateQuestion(data, id) {
     }
 }
 
+async function destroyQuestion(id) {
+    try {
+        const question = await questionRepository.destroy(id);
+        return question;
+    } catch(error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Cannot delete the requested question', error.statusCode);
+        }            
+        throw new AppError('Cannot delete the requested question', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+
 module.exports = {
     createQuestion,
     getQuestions,
     getQuestion,
-    updateQuestion
+    updateQuestion,
+    destroyQuestion
 }

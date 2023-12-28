@@ -69,9 +69,25 @@ async function updateQuestion(req, res) {
     }
 }
 
+async function destroyQuestion(req, res) {
+    try {
+        const question = await QuestionService.destroyQuestion(req.params.id);
+        SuccessResponse.data = question;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createQuestion,
     getQuestions,
     getQuestion,
-    updateQuestion
+    updateQuestion,
+    destroyQuestion
 }

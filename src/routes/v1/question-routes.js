@@ -19,4 +19,7 @@ router.patch('/:id',
         QuestionMiddlewares.validateUpdateRequest,
         QuestionController.updateQuestion);
 
+router.delete('/:id',
+        QuestionController.destroyQuestion);
+
 module.exports = router;
