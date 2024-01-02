@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Question, {
         foreignKey: 'questionId',
         onDelete: 'cascade'
+      }),
+      this.hasMany(models.Comment, {
+        foreignKey: 'answerId',
+        onDelete: 'cascade'
       })
     }
   }

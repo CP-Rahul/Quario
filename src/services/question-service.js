@@ -23,7 +23,7 @@ async function createQuestion(data) {
 
 async function getQuestions() {
     try {
-        const question = await questionRepository.getAllQuestionsAndAnswers();
+        const question = await questionRepository.getAllQuestionsWithAnswersAndComments();
         return question;
     } catch(error) {
         throw new AppError('Cannot get the questions and answers', StatusCodes.INTERNAL_SERVER_ERROR);
@@ -32,7 +32,7 @@ async function getQuestions() {
 
 async function getQuestion(id) {
     try {
-        const question = await questionRepository.getQuestionAndAnswers(id);
+        const question = await questionRepository.getQuestionWithAnswersAndComments(id);
         return question;
     } catch(error) {
         console.log(error)
