@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'answerId',
         onDelete: 'cascade'
       })
+      this.hasMany(models.Like,{
+        foreignKey: 'likableId',
+        onDelete: 'cascade'
+      })
     }
   }
   Comment.init({

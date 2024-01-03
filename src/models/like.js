@@ -15,6 +15,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Answer,{
+        foreignKey: 'likableId',
+        scope: {
+          commentableType: 'Answer'
+        },
+        onDelete: 'cascade'
+      })
+      this.belongsTo(models.Comment,{
+        foreignKey: 'likableId',
+        scope: {
+          commentableType: 'Comment'
+        },
+        onDelete: 'cascade'
+      })
     }
   }
   Like.init({
