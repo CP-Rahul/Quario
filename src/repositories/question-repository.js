@@ -29,7 +29,7 @@ class QuestionRepository extends CrudRepository{
             throw error;
         }
     }
-
+rio
     async getQuestionWithAnswersAndComments(id) {
         try {
             const response = await Question.findOne({
@@ -41,9 +41,6 @@ class QuestionRepository extends CrudRepository{
                     model: Answer,
                     required: false,
                     as: 'Answers',
-                    where: {
-                       questionId: id
-                    },
                     include: {
                      model: Comment,
                      required: false,
