@@ -7,7 +7,6 @@ class LikeRepository extends CrudRepository {
     }
 
     async isLiked(data) {
-        console.log(data)
         try {
             const response = await Like.findOne({
                 where: {
