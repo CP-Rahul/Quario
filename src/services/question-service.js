@@ -35,7 +35,6 @@ async function getQuestion(id) {
         const question = await questionRepository.getQuestionDetails(id);
         return question;
     } catch(error) {
-        console.log(error)
         if(error.statusCode == StatusCodes.NOT_FOUND) {
             throw new AppError('Cannot get the requested question and answers', error.statusCode);
         }            

@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 
 const CrudRepository = require('./crud-repository')
-const { Question, Answer, Comment, Like } = require('../models');
+const { Question, Answer, Comment, Like, Topic} = require('../models');
 const AppError = require('../utills/error/app-error');
 
 class QuestionRepository extends CrudRepository{
@@ -12,6 +12,11 @@ class QuestionRepository extends CrudRepository{
         try {
             const response = await Question.findAll({
                 include: [
+                  {
+                    model: Topic,
+                    required: false,
+                    as: 'Topics'
+                  },
                   {
                     model: Answer,
                     required: false,
@@ -48,7 +53,13 @@ rio
                 where: {
                     id: id
                 },
-                include: {
+                include: [
+                  {
+                    model: Topic,
+                    required: false,
+                    as: 'Topics'
+                  },
+                  {
                   model: Answer,
                   required: false,
                   as: 'Answers',
@@ -75,7 +86,8 @@ rio
                       }
                     }
                   ]
-                }   
+                } 
+              ]  
               });
               if(!response) {
                 throw new AppError('The requested resource is not found', StatusCodes.NOT_FOUND);
