@@ -4,16 +4,34 @@ const { ServerConfig } = require('../../config')
 
 
 function comparePassword(password, encryptedPassword) {
-    const match = bcrypt.compareSync(password, encryptedPassword);
-    return match;
+    try {
+        const match = bcrypt.compareSync(password, encryptedPassword);
+        return match;
+    } catch (error) {
+        throw error;  
+    }
 }
 
 function generateToken(input) {
-    const token = jwt.sign(input, ServerConfig.JWTSECRET, { expiresIn: ServerConfig.JWTEXPIRY });
-    return token;
+    try {
+        const token = jwt.sign(input, ServerConfig.JWTSECRET, { expiresIn: ServerConfig.JWTEXPIRY });
+        return token;
+    } catch (error) {
+        throw error;
+    }
+}
+
+function verifyToken(token) {
+    try {
+        const response = jwt.verify(token, ServerConfig.JWTSECRET);
+        return response;
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = {
     comparePassword,
-    generateToken
+    generateToken,
+    verifyToken
 };
