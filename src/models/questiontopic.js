@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   QuestionTopic.init({
-    questionId: {
+    QuestionId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    topicId: {
+    TopicId: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
     sequelize,
-    modelName: 'QuestionTopic',
+    modelName: 'QuestionTopics',
   });
   return QuestionTopic;
 };

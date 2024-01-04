@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
       })
       this.belongsToMany(models.Topic, {
-        through: 'questiontopic'
+        through: 'questiontopics'
       })
     }
   }

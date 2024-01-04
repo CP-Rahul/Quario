@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      questionId: {
+      QuestionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -18,7 +18,7 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
-      topicId: {
+      TopicId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
