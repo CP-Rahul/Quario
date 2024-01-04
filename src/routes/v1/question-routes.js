@@ -1,11 +1,12 @@
 const express = require('express');
 
 const { QuestionController } = require('../../controllers');
-const { QuestionMiddlewares } = require('../../middlewares');
+const { QuestionMiddlewares, UserMiddlewares } = require('../../middlewares');
 
 const router = express.Router();
 
 router.post('/',
+        UserMiddlewares.checkAuth,
         QuestionMiddlewares.validateCreateRequest,
         QuestionController.createQuestion);
 
@@ -19,10 +20,12 @@ router.get('/:id',
         QuestionController.getQuestion);
 
 router.patch('/:id',
+        UserMiddlewares.checkAuth,
         QuestionMiddlewares.validateUpdateRequest,
         QuestionController.updateQuestion);
 
 router.delete('/:id',
+        UserMiddlewares.checkAuth,
         QuestionController.destroyQuestion);
 
 module.exports = router;
