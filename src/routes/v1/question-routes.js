@@ -9,6 +9,9 @@ router.post('/',
         QuestionMiddlewares.validateCreateRequest,
         QuestionController.createQuestion);
 
+router.get('/topic', 
+        QuestionController.getQuestionsByTopic);
+        
 router.get('/',
         QuestionController.getQuestions);
 

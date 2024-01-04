@@ -66,11 +66,23 @@ async function destroyQuestion(id) {
     }
 }
 
+async function getQuestionsByTopic(data) {
+    try {
+        const questions = await questionRepository.filter(data.name);
+        return questions;
+    } catch (error) {
+        if(error.StatusCodes == StatusCodes.NOT_FOUND) {
+            throw new AppError('Cannot find the questions related to this topic', StatusCodes.NOT_FOUND);
+        }
+        throw new AppError('Cannot find the questions related to this topic', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 module.exports = {
     createQuestion,
     getQuestions,
     getQuestion,
     updateQuestion,
-    destroyQuestion
+    destroyQuestion,
+    getQuestionsByTopic
 }

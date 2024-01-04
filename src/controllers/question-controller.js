@@ -83,10 +83,28 @@ async function destroyQuestion(req, res) {
     }
 }
 
+async function getQuestionsByTopic(req, res) {
+    try {
+        const questions = await QuestionService.getQuestionsByTopic({
+            name: req.query.name
+        });
+        SuccessResponse.data = questions;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse); 
+    }
+}
+
 module.exports = {
     createQuestion,
     getQuestions,
     getQuestion,
     updateQuestion,
-    destroyQuestion
+    destroyQuestion,
+    getQuestionsByTopic
 }

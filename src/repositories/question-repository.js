@@ -46,7 +46,7 @@ class QuestionRepository extends CrudRepository{
             throw error;
         }
     }
-rio
+
     async getQuestionDetails(id) {
         try {
             const response = await Question.findOne({
@@ -96,6 +96,34 @@ rio
         } catch (error) {
             throw error;
         }
+    }
+
+    async filter(data) {
+      try {
+        const response = await Question.findAll({
+          include: [
+            {
+              model: Answer,
+              required: false,
+              as: 'Answers',
+            },
+            {
+              model: Topic,
+              required: true,
+              as: 'Topics',
+              where: {
+                name: (data)
+              }
+            }
+          ]
+        });
+        if(!response) {
+          throw new AppError('Cannot find the requested resource', StatusCodes.NOT_FOUND);
+        }
+        return response;
+      } catch (error) {
+        throw error;
+      }
     }
 }
 
