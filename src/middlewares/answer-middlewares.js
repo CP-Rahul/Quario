@@ -11,13 +11,6 @@ function validateCreateRequest(req, res, next) {
                 .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse)
     }
-    if(!req.body.userId) {
-        ErrorResponse.message = 'Something went wrong while creating question';
-        ErrorResponse.error = new AppError('userId is not found in the request body', StatusCodes.BAD_REQUEST);
-        return res
-                .status(StatusCodes.BAD_REQUEST)
-                .json(ErrorResponse)
-    }
     if(!req.body.questionId) {
         ErrorResponse.message = 'Something went wrong while creating question';
         ErrorResponse.error = new AppError('questionId is not found in the request body', StatusCodes.BAD_REQUEST);

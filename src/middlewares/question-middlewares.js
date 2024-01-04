@@ -4,9 +4,9 @@ const { ErrorResponse } = require("../utills/common");
 const AppError = require("../utills/error/app-error");
 
 function validateCreateRequest(req, res, next) {
-    if(!req.body.userId) {
+    if(!req.body.description) {
         ErrorResponse.message = 'Something went wrong while creating question';
-        ErrorResponse.error = new AppError('userId is not found in the request body', StatusCodes.BAD_REQUEST);
+        ErrorResponse.error = new AppError('description is not found in the request body', StatusCodes.BAD_REQUEST);
         return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse)

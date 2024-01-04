@@ -5,7 +5,7 @@ const { SuccessResponse, ErrorResponse } = require('../utills/common');
 async function createLike(req, res) {
     try {
         const like = await LikeService.createLike({
-            userId: req.body.userId,
+            userId: req.user,
             likableId: req.query.likableId,
             likableType: req.query.likableType
         });

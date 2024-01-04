@@ -8,7 +8,7 @@ async function createAnswer(req, res) {
         const answer = await AnswerService.createAnswer({
             content: req.body.content,
             questionId: req.body.questionId,
-            userId: req.body.userId
+            userId: req.user
         });
         SuccessResponse.data = answer;
         return res

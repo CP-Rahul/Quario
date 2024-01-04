@@ -7,7 +7,7 @@ async function createQuestion(req, res) {
     try {
         const question = await QuestionService.createQuestion({
             description: req.body.description,
-            userId: req.body.userId
+            userId: req.user
         });
         SuccessResponse.data = question;
         return res
